@@ -8,7 +8,9 @@ class ContigomasController extends JControllerLegacy
 	
 	public function display($cachable = false, $urlparams = false) 
 	{
-	
+
+        require_once JPATH_COMPONENT . '/helpers/contigomas.php';
+
 		//programar una vista por defecto si no se establece
 		$input = JFactory::getApplication()->input;
 		//set establece y get toma

@@ -9,14 +9,15 @@ jimport('joomla.application.component.view');
  //~ print_r($this);
  //~ echo '</pre>';
  
-class ContigomasViewEsxportar extends JViewLegacy
+class ContigomasViewExportar extends JViewLegacy
 {
         /*** display method of Hello view
          * @return void  */
         public function display($tpl = null) 
         {
-					
-               
+				ContigomasHelper::addSubmenu('exportar');
+	
+                $this->getExportar();
                 // Check for errors.
                 if (count($errors = $this->get('Errors'))) 
                 {

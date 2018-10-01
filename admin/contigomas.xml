@@ -26,7 +26,6 @@
 		<filename>index.html</filename>
 		<filename>controller.php</filename>	
 		<filename>contigomas.php</filename>
-		<folder>helpers</folder>
 		<folder>views</folder>
 		<folder>models</folder>
 		<folder>controllers</folder>
@@ -54,7 +53,7 @@
 			<filename>controller.php</filename>	
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>
-		
+			<folder>helpers</folder>
 			<folder>sql</folder>
 			<folder>models</folder>
 			<folder>views</folder>

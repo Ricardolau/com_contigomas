@@ -28,7 +28,8 @@ y visualizar objeto paginación.
         $this->state            = $this->get('State');
         $this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
-		
+		ContigomasHelper::addSubmenu('contigomas');
+
 		
 			//check errores
 		if (count($errors = $this->get('Errors')))
