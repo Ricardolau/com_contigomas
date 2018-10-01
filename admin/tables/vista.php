@@ -24,7 +24,7 @@ class ContigomasTableVista extends JTable
           //~ print_r($this);
      //~ echo '</pre>';
 		
-		parent::__construct('#__contigomasd', 'id', $db);
+		parent::__construct('#__contigomas', 'id', $db);
 	}
 
 
