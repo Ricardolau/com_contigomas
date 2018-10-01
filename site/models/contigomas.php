@@ -36,41 +36,36 @@ class ContigomasModelContigomas extends JModelForm
 
 		return $data;
 	}
-	public function getInsertQuery($datos){
-		$db = JFactory::getDBO();
-		$query = $db->getQuery(true);
-		//~ $columns = array('nombre', 'apellidos', 'dni', 'telefono', 'email', 'calle', 'numero', 'piso', 'codigopostal', 'municipio', 'provincia', 'aceptar', 'created',  'modified');
-		//~ $idUsuario="664";
-		//~ $aliasUsua='natalia';
-		$fecha='"'.date("Y-m-d H:i:s").'"';
-		//~ $values = array($datos['nombre'], $datos['apellidos'], $datos['dni'], '5698563589', $datos['email'], $datos['calle'], $datos['numero'], $datos['piso'], '66225', $datos['municipio'], $datos['provincia'], $datos['terminos'], $fecha, $fecha);
-		//~ $query
-			//~ ->insert($db->quoteName('#__contigomas'))
-			//~ ->columns($db->quoteName($columns))
-			//~ ->values(implode(',', $values));
-		$nombre=substr($datos['nombre'], 0, 1);
+	//~ public function getInsertQuery($datos){
+		//~ $db = JFactory::getDBO();
+		//~ $query = $db->getQuery(true);
 		
-		$apellidos=explode(" ", $datos['apellidos']);
-		$apellido1=substr($apellidos[0], 0, 1); 
-		$apellido2=substr($apellidos[1], 0, 1); 
-		$amd=date("Ymd");
-		$hm=date("Hi");
+		//~ $fecha='"'.date("Y-m-d H:i:s").'"';
+
 		
-		$codigo=$nombre.$apellido1.$apellido2.$amd.$hm;
-		$query='insert into #__contigomas (codigo, nombre, apellidos, dni, telefono, email, 
-		calle, numero, piso, codigopostal, municipio, provincia, aceptar, created,  modified) VALUES (
-		"'.$codigo.'", "'.$datos['nombre'].'", "'.$datos['apellidos'].'", "'.$datos['dni'].'", "'.$datos['telefono'].'", "'.$datos['email'].'", 
-		"'.$datos['calle'].'", "'.$datos['numero'].'", "'.$datos['piso'].'", "'.$datos['codigoPostal'].'", "'.$datos['municipio'].'", 
-		"'.$datos['provincia'].'", "'.$datos['terminos'].'", '.$fecha.', '.$fecha.')';
-		$db->setQuery($query);
-		$db->execute();
-		if ($db->getErrorNum()){
-			$mensaje="Error al insertar los datos";
-		}else{
-			$mensaje="Datos insertados con éxito";
-		}
-      return $mensaje; 
-	}
+		//~ $nombre=substr($datos['nombre'], 0, 1);
+		
+		//~ $apellidos=explode(" ", $datos['apellidos']);
+		//~ $apellido1=substr($apellidos[0], 0, 1); 
+		//~ $apellido2=substr($apellidos[1], 0, 1); 
+		//~ $amd=date("Ymd");
+		//~ $hm=date("Hi");
+		
+		//~ $codigo=$nombre.$apellido1.$apellido2.$amd.$hm;
+		//~ $query='insert into #__contigomas (codigo, nombre, apellidos, dni, telefono, email, 
+		//~ calle, numero, piso, codigopostal, municipio, provincia, aceptar, created,  modified) VALUES (
+		//~ "'.$codigo.'", "'.$datos['nombre'].'", "'.$datos['apellidos'].'", "'.$datos['dni'].'", "'.$datos['telefono'].'", "'.$datos['email'].'", 
+		//~ "'.$datos['calle'].'", "'.$datos['numero'].'", "'.$datos['piso'].'", "'.$datos['codigoPostal'].'", "'.$datos['municipio'].'", 
+		//~ "'.$datos['provincia'].'", "'.$datos['terminos'].'", '.$fecha.', '.$fecha.')';
+		//~ $db->setQuery($query);
+		//~ $db->execute();
+		//~ if ($db->getErrorNum()){
+			//~ $mensaje="Error al insertar los datos";
+		//~ }else{
+			//~ $mensaje="Datos insertados con éxito";
+		//~ }
+      //~ return $mensaje; 
+	//~ }
 	
 	
 }

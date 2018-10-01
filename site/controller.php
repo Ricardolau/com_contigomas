@@ -61,9 +61,7 @@ class ContigomasController extends JControllerLegacy
 
 		//~ // Get the data from POST
 		 $this->resultado = JRequest::getVar('jform', array(), 'get', 'array');
-		 $html_respuestaformulario		= $this->resultado['html_respuestaformulario'];
-		 $respuesta_site		= $this->resultado['respuesta_site'];
-		 
+		
 
 		 
 		 // Ahora comprobamos resultado
@@ -85,7 +83,7 @@ class ContigomasController extends JControllerLegacy
 			 * Y luego creo que los datos ya estarían...*/
 			 
 			//$this->dato = $codigo;
-			$this->set('view', $input->getCmd('view', 'vista1')); 
+			$this->set('view', $input->getCmd('view', 'respuesta')); 
 			//~ $this->setRedirect(JRoute::_('index.php?option=com_codigorecibo&view=vista1&id='.$codigo.'&recibo='.$recibo),false);
 			return ;
 		//}

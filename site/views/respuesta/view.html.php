@@ -5,7 +5,7 @@ defined( '_JEXEC') or die( 'Restricted access');
 //~ echo '<br/> * Estoy en view.html.php de vista1 / Voy a crear Class 		 * <br/>';
 //~ echo '<br/> ************************************************************** <br/>';
 
-class ContigomasViewVista1 extends JViewLegacy
+class ContigomasViewRespuesta extends JViewLegacy
 {
 	protected $resultado;
 	//protected $item;

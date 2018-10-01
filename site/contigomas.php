@@ -23,23 +23,21 @@ $controller->execute(JFactory::getApplication()->input->get('task'));
 
 if  (isset($controller->resultado)){
 
-$respuesta_site = $controller->resultado['respuesta_site'];
-$html_respuestaformulario = $controller->resultado['html_respuestaformulario'];
-//~ $controller->prueba= $recibo;
-//~ $resultado = "Algo";
-//~ 
-$view="vista1"; 
+$respuesta = $controller->resultado;
+
+$view="respuesta";
+
 //~ $controller->execute(JFactory::getApplication()->input->set('resultado', $resultado));
 //añadir datos a base de datos
-include_once 'models/contigomas.php';
-$contigo=new ContigomasModelContigomas();
-$insert=$contigo->getInsertQuery($controller->resultado);
-echo $insert;
-//~ $controller->execute(JFactory::getApplication()->input->set('view', $view));
+//~ include_once 'models/contigomas.php';
+//~ $contigo=new ContigomasModelContigomas();
+//~ $insert=$contigo->getInsertQuery($controller->resultado);
+//~ echo $insert;
+$controller->execute(JFactory::getApplication()->input->set('view', $view));
 //~ echo '+++++++++++++++++++++++++++++++++++++++++++++++++++';
-//~ echo '<pre>';
-//~ print_r($resultado);
-//~ echo '</pre>';
+echo '<pre>';
+//print_r($insert);
+echo '</pre>';
 //~ echo '+++++++++++++++++++++++++++++++++++++++++++++++++++';
 //~ $controller->setRedirect(JRoute::_('index.php?option=com_codigorecibo&view=vista1&id='.$codigo.'&recibo='.$recibo),false);
 //~ echo '<pre>';
