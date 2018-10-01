@@ -12,6 +12,9 @@ foreach($this->items as $i => $item): ?>
 		</td>
 		<td>
 			<?php echo $item->id; ?>
+		</td>	
+		<td>
+			<?php echo $item->codigo; ?>
 		</td>		
 		<td>
 			<?php echo $item->created; ?>

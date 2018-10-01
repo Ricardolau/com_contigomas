@@ -13,7 +13,10 @@ $listDirn       = $this->escape($this->state->get('list.direction', 'asc'));
 	</th>
 	<th width="2%">
 		<?php echo  JHTML::_('grid.sort', 'Id', 'id', $listDirn, $listOrder); ?>
-	</th>			
+	</th>	
+	<th width="5%">
+		<?php echo  JHTML::_('grid.sort', 'Código', 'codigo', $listDirn, $listOrder); ?>
+	</th>		
 	<th width="2%">
 		<?php echo  JHTML::_('grid.sort', 'Fecha', 'created', $listDirn, $listOrder); ?>
 	</th>			
