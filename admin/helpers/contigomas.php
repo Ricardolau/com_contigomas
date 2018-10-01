@@ -19,7 +19,7 @@ class ContigomasHelper extends JHelperContent
 
 			JSubMenuHelper::addEntry('<h2 class="nav-header">Herramientas y otros</h2>');
             JSubMenuHelper::addEntry('Esportar tabla','index.php?option=com_contigomas&view=exportar&extension=com_contigomas', $submenu == 'exportar');
-            JSubMenuHelper::addEntry('Listado registros','index.php?option=com_contigomas&view=exportar&extension=com_contigomas', $submenu == 'contigomas');
+            JSubMenuHelper::addEntry('Listado registros','index.php?option=com_contigomas&view=contigomas&extension=com_contigomas', $submenu == 'contigomas');
 
 
         }

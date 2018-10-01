@@ -9,7 +9,7 @@ jimport('joomla.application.component.view');
  //~ print_r($this);
  //~ echo '</pre>';
  
-class ContigomasViewExportar extends JViewLegacy
+class ContigomasViewVista extends JViewLegacy
 {
         /*** display method of Hello view
          * @return void  */

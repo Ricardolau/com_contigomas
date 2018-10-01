@@ -6,7 +6,7 @@ jimport('joomla.application.component.modellist');
 //JModelList 
 class ContigomasModelExportar extends JModelList
 {
-	protected function getListQuery()
+	public function getListQuery()
 	{
 		//Crea un nuevo objeto de consulta
 		$db = JFactory::getDBO();
@@ -23,12 +23,12 @@ class ContigomasModelExportar extends JModelList
 			//~ $orderCol = 'c.title '.$orderDirn.', a.ordering';
 		//~ }
 		$query->order($db->escape($orderCol.' '.$orderDirn));
+		$db->setQuery($query);
+		$respuesta = $db->execute();
 		
-		
-		
-		return $query;
+		return $respuesta;
 	}
-    protected function getExportar(){
+    public function getExportar(){
         $query = $this->getListQuery();
         if($query->num_rows > 0){
             $delimiter = ",";
@@ -43,8 +43,7 @@ class ContigomasModelExportar extends JModelList
             
             //output each row of the data, format line as csv and write to file pointer
             while($row = $query->fetch_assoc()){
-                $status = ($row['status'] == '1')?'Active':'Inactive';
-                $lineData = array($row['id'], $row['name'], $row['email'], $row['phone'], $row['created'], $status);
+                $lineData = array($row['id'], $row['nombre'], $row['email'], $row['telefono'], $row['dni']);
                 fputcsv($f, $lineData, $delimiter);
             }
             

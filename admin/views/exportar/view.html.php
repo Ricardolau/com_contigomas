@@ -17,7 +17,11 @@ class ContigomasViewExportar extends JViewLegacy
         {
 				ContigomasHelper::addSubmenu('exportar');
 	
-                $this->getExportar();
+                $S = $this->get('exportar');
+                
+                echo '<pre>';
+                print_r($S);
+                echo '</pre>';
                 // Check for errors.
                 if (count($errors = $this->get('Errors'))) 
                 {
