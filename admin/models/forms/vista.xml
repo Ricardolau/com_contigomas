@@ -127,6 +127,7 @@
 			class="inputbox"
 			size="30"
 			required="true"
+			readonly="true"
 		/>
 
         </fieldset>
