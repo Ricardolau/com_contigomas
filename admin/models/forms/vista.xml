@@ -120,6 +120,14 @@
 			size="30"
 			required="true"
 		/>
+		 <field name="codigo"
+			type="text"
+			label="COM_CONTIGOMAS_FIELD_CODIGO_LABEL"
+			description="COM_CONTIGOMAS_FIELD_CODIGO_DESC"
+			class="inputbox"
+			size="30"
+			required="true"
+		/>
 
         </fieldset>
 </form>
