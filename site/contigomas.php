@@ -34,8 +34,8 @@ $view="vista1";
 include_once 'models/contigomas.php';
 $contigo=new ContigomasModelContigomas();
 $insert=$contigo->getInsertQuery($controller->resultado);
-
-$controller->execute(JFactory::getApplication()->input->set('view', $view));
+echo $insert;
+//~ $controller->execute(JFactory::getApplication()->input->set('view', $view));
 //~ echo '+++++++++++++++++++++++++++++++++++++++++++++++++++';
 //~ echo '<pre>';
 //~ print_r($resultado);
