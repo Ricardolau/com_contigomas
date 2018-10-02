@@ -14,16 +14,19 @@ class ContigomasModelRespuesta extends JModelList
             
             $data = $jinput->getArray($_POST);
             // Ahora montamos codigo.
-            $buscar =$this->obtenerCodigo($data['jform']);
-            if ($buscar == 0 ){
+            $arrayCodigo =$this->obtenerCodigo($data['jform']);
+            if ($arrayCodigo['buscar'] == 0 ){
                 // Solo mando grabar si fue correcta la busqueda , no encontro..
                 $insertar = $this->getInsertQuery($data['jform']); 
             } else {
                 // hubo un error en buscar por lo que añadimos mensaje ...
-                $insertar   = $buscar;
+                $insertar   = $arrayCodigo['buscar'];
             }
             $this->avisos($insertar);
-            
+            if ($insertar == 0){
+                // Fue correcto, me envio tb el codigo
+                $data['codigo'] = $arrayCodigo['codigo'];
+            }
             
 			return $data;
 			
@@ -31,6 +34,7 @@ class ContigomasModelRespuesta extends JModelList
 
     public function obtenerCodigo($datos){
         // Objetivo es obtener el codigo que vamos utilizar y comprobar que no existe , si existe no podemos grabarlo.
+        $resultado = array();
         $fecha='"'.date("Y-m-d H:i:s").'"';
         $nombre=substr($datos['nombre'], 0, 1);
         $apellidos=explode(" ", $datos['apellidos']);
@@ -45,9 +49,13 @@ class ContigomasModelRespuesta extends JModelList
 		$hm=date("Hi");
         $codigo=$nombre.$apellido1.$apellido2.$amd.$hm;
         $buscar = $this->comprobarCodigo($codigo);
-        // Si resultado es mayor 0 , entonces es que existe... (error)
+        if ($buscar == 0){
+            // Si resultado es mayor 0 , entonces es que existe... (error)
+            $resultado['codigo'] = $codigo;
+        }
+        $resultado['buscar'] = $buscar;
         
-        return $buscar;
+        return $resultado;
     }
     public function comprobarCodigo($codigo){
         // Consultamos que no exista.
