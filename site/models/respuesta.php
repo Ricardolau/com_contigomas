@@ -23,6 +23,8 @@ class ContigomasModelRespuesta extends JModelList
                 $insertar   = $buscar;
             }
             $this->avisos($insertar);
+            
+            
 			return $data;
 			
 	}
