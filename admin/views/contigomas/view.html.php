@@ -53,7 +53,6 @@ y visualizar objeto paginación.
 	{
 				//intencion AÑADIR menu Toolbar btnes añadir, editar..
 	 JToolBarHelper::title( 'Componente ContigoMas ', 'contigomas.png' );
-     JToolBarHelper::addNew('vista.add');
      JToolBarHelper::editList('vista.edit');     
      
      //----- nuevo es cambiado por => codigorecibo -----------//

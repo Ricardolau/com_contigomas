@@ -20,13 +20,7 @@ foreach($this->items as $i => $item): ?>
 			<?php echo $item->created; ?>
 		</td>	
 		<td>
-			<?php echo $item->nombre; ?>
-		</td>
-		<td>
-			<?php echo $item->apellido1; ?>
-		</td>
-		<td>
-			<?php echo $item->apellido2; ?>
+			<?php echo $item->nombre.' '.$item->apellido1.' '.  $item->apellido2; ?>
 		</td>
 		<td>
 			<?php echo $item->codigopostal; ?>
@@ -38,15 +32,6 @@ foreach($this->items as $i => $item): ?>
 			<?php echo $item->email; ?>
 		</td>
 		<td>
-			<?php echo $item->calle; ?>
-		</td>
-		<td>
-			<?php echo $item->numero; ?>
-		</td>
-		<td>
-			<?php echo $item->piso; ?>
-		</td>
-		<td>
 			<?php echo $item->municipio; ?>
 		</td>
 		<td>
@@ -55,6 +40,14 @@ foreach($this->items as $i => $item): ?>
 		<td>
 			<?php echo $item->terminos; ?>
 		</td>
+        <td>
+			<?php echo $item->base; ?>
+		</td>
+        <td>
+			<?php echo $item->regalo; ?>
+		</td>
+        
+        
 	</tr>
 <?php endforeach; ?>
 <!--JHTML :: _ es una función auxiliar capaz de mostrar varios salida HTML.

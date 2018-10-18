@@ -20,14 +20,8 @@ $listDirn       = $this->escape($this->state->get('list.direction', 'asc'));
 	<th width="2%">
 		<?php echo  JHTML::_('grid.sort', 'Fecha', 'created', $listDirn, $listOrder); ?>
 	</th>			
-	<th width="5%">
-		<?php echo  JHTML::_('grid.sort', 'Nombre', 'nombre', $listDirn, $listOrder); ?>
-	</th>
-	<th width="5%">
-		<?php echo  JHTML::_('grid.sort', 'Apellido1', 'apellido1', $listDirn, $listOrder); ?>
-	</th>
-	<th width="5%">
-		<?php echo  JHTML::_('grid.sort', 'Apellido2', 'apellido2', $listDirn, $listOrder); ?>
+	<th width="15%">
+		<?php echo  'Nombre Completo'; ?>
 	</th>
 	<th width="5%">
 		<?php echo  JHTML::_('grid.sort', 'Codigo Postal', 'codigopostal', $listDirn, $listOrder); ?>
@@ -39,23 +33,21 @@ $listDirn       = $this->escape($this->state->get('list.direction', 'asc'));
 	<th width="5%">
 		<?php echo  JHTML::_('grid.sort', 'EMAIL', 'email', $listDirn, $listOrder); ?>
 	</th>
-	<th width="5%">
-		<?php echo  JHTML::_('grid.sort', 'Calle', 'calle', $listDirn, $listOrder); ?>
-	</th>
-	<th width="5%">
-		<?php echo  JHTML::_('grid.sort', 'Número', 'numero', $listDirn, $listOrder); ?>
-	</th>
-	<th width="5%">
-		<?php echo  JHTML::_('grid.sort', 'Piso', 'piso', $listDirn, $listOrder); ?>
-	</th>
+	
 	<th width="5%">
 		<?php echo  JHTML::_('grid.sort', 'Municipio', 'municipio', $listDirn, $listOrder); ?>
 	</th>
 	<th width="5%">
 		<?php echo  JHTML::_('grid.sort', 'Provincia', 'provincia', $listDirn, $listOrder); ?>
 	</th>
-	<th width="5%">
+    <th width="5%">
 		<?php echo  JHTML::_('grid.sort', 'Terminos', 'terminos', $listDirn, $listOrder); ?>
+	</th>
+    <th width="5%">
+		<?php echo  JHTML::_('grid.sort', 'Base', 'base', $listDirn, $listOrder); ?>
+	</th>
+	<th width="5%">
+		<?php echo  JHTML::_('grid.sort', 'Regalo', 'regalo', $listDirn, $listOrder); ?>
 	</th>
 	
 </tr>
