@@ -37,13 +37,14 @@ class ContigomasModelRespuesta extends JModelList
         $resultado = array();
         $fecha='"'.date("Y-m-d H:i:s").'"';
         $nombre=substr($datos['nombre'], 0, 1);
-        $apellidos=explode(" ", $datos['apellidos']);
-        $apellido1=substr($apellidos[0], 0, 1); 
-        if ( count($apellidos) >1) {
-       		$apellido2=substr($apellidos[1], 0, 1); 
-        } else {
-            $apellido2= '';
-        }
+        //~ $apellidos=explode(" ", $datos['apellidos']);
+        $apellido1=substr($datos['apellido1'], 0, 1); 
+        $apellido2=substr($datos['apellido2'], 0, 1); 
+        //~ if ( count($apellidos) >1) {
+       		//~ $apellido2=substr($apellidos[1], 0, 1); 
+        //~ } else {
+            //~ $apellido2= '';
+        //~ }
         
         $amd=date("Ymd");
 		$hm=date("Hi");
@@ -61,7 +62,7 @@ class ContigomasModelRespuesta extends JModelList
         // Consultamos que no exista.
         $db = JFactory::getDBO();
 		$query = $db->getQuery(true);
-        $query->select('id, codigo,created, nombre, apellidos, dni, telefono, email, calle, numero, piso,codigopostal,municipio,provincia,aceptar')
+        $query->select('id, codigo,created, nombre, apellido1, apellido2, telefono, email, calle, numero, piso,codigopostal,municipio,provincia,aceptar')
 		->from('#__contigomas')
         ->where( $db->quoteName('codigo').' = "'.$codigo.'"');
         //~ $query = 'Select id, codigo from #__contigomas where codigo = "'.$codigo.'"';
@@ -80,22 +81,34 @@ class ContigomasModelRespuesta extends JModelList
 		$fecha='"'.date("Y-m-d H:i:s").'"';
 		
 		$nombre=substr($datos['nombre'], 0, 1);
-		
-		$apellidos=explode(" ", $datos['apellidos']);
-        if ( count($apellidos) >1) {
-            $apellido2=substr($apellidos[1], 0, 1); 
-        } else {
-            $apellido2= '';
-        }
-        $apellido1=substr($apellidos[0], 0, 1); 
+		$apellido1=substr($datos['apellido1'], 0, 1);
+		$apellido2=substr($datos['apellido2'], 0, 1);
+		//~ $apellidos=explode(" ", $datos['apellidos']);
+        //~ if ( count($apellidos) >1) {
+            //~ $apellido2=substr($apellidos[1], 0, 1); 
+        //~ } else {
+            //~ $apellido2= '';
+        //~ }
+        //~ $apellido1=substr($apellidos[0], 0, 1); 
+        
+        //~ $expresion = '/^[9|6|7][0-9]{8}$/';
+        //~ $bandera=0;
+        //~ if(preg_match($expresion, $datos['telefono'])){ 
+			//~ $bandera=1;
+			//~ $texto="El teléfono no es correcto";
+			//~ return $texto;
+		//~ }else{
+			 //~ $bandera=0;
+		//~ } 
         
 		$amd=date("Ymd");
 		$hm=date("Hi");
 		
 		$codigo=$nombre.$apellido1.$apellido2.$amd.$hm;
-		$query='insert into #__contigomas (codigo, nombre, apellidos, dni, telefono, email, 
+		
+		$query='insert into #__contigomas (codigo, nombre, apellido1, apellido2, telefono, email, 
 		calle, numero, piso, codigopostal, municipio, provincia, aceptar, created,  modified) VALUES (
-		"'.$codigo.'", "'.$datos['nombre'].'", "'.$datos['apellidos'].'", "'.$datos['dni'].'", "'.$datos['telefono'].'", "'.$datos['email'].'", 
+		"'.$codigo.'", "'.$datos['nombre'].'", "'.$datos['apellido1'].'", "'.$datos['apellido2'].'", "'.$datos['telefono'].'", "'.$datos['email'].'", 
 		"'.$datos['calle'].'", "'.$datos['numero'].'", "'.$datos['piso'].'", "'.$datos['codigoPostal'].'", "'.$datos['municipio'].'", 
 		"'.$datos['provincia'].'", "'.$datos['terminos'].'", '.$fecha.', '.$fecha.')';
 		$db->setQuery($query);

@@ -24,14 +24,15 @@ $listDirn       = $this->escape($this->state->get('list.direction', 'asc'));
 		<?php echo  JHTML::_('grid.sort', 'Nombre', 'nombre', $listDirn, $listOrder); ?>
 	</th>
 	<th width="5%">
-		<?php echo  JHTML::_('grid.sort', 'Apellidos', 'apellidos', $listDirn, $listOrder); ?>
+		<?php echo  JHTML::_('grid.sort', 'Apellido1', 'apellido1', $listDirn, $listOrder); ?>
+	</th>
+	<th width="5%">
+		<?php echo  JHTML::_('grid.sort', 'Apellido2', 'apellido2', $listDirn, $listOrder); ?>
 	</th>
 	<th width="5%">
 		<?php echo  JHTML::_('grid.sort', 'Codigo Postal', 'codigopostal', $listDirn, $listOrder); ?>
 	</th>
-	<th width="5%">
-		<?php echo  JHTML::_('grid.sort', 'DNI', 'dni', $listDirn, $listOrder); ?>
-	</th>
+	
 	<th width="5%">
 		<?php echo  JHTML::_('grid.sort', 'Teléfono', 'telefono', $listDirn, $listOrder); ?>
 	</th>

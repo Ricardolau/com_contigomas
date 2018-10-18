@@ -11,18 +11,18 @@
 			size="30"
 			required="true"
 		 />
-		<field name="apellidos"
+		<field name="apellido1"
 			type="text"
-			label="COM_CONTIGOMAS_FIELD_APELLIDOS_LABEL"
-			description="COM_CONTIGOMAS_FIELD_APELLIDOS_DESC"
+			label="COM_CONTIGOMAS_FIELD_APELLIDO1_LABEL"
+			description="COM_CONTIGOMAS_FIELD_APELLIDO1_DESC"
 			size="30"
 			required="true"
 		/>
 
-		<field name="dni"
+		<field name="apellido2"
 			type="text"
-			label="COM_CONTIGOMAS_FIELD_DNI_LABEL"
-			description="COM_CONTIGOMAS_FIELD_DNI_DESC"
+			label="COM_CONTIGOMAS_FIELD_APELLIDO2_LABEL"
+			description="COM_CONTIGOMAS_FIELD_APELLIDO2_DESC"
 			size="30"
 		/>
          <field name="telefono"
@@ -34,7 +34,7 @@
             pattern="[0-9]{9}"
 		/>
         <field name="email"
-			type="text"
+			type="email"
 			label="COM_CONTIGOMAS_FIELD_EMAIL_LABEL"
 			description="COM_CONTIGOMAS_FIELD_EMAIL_DESC"
 			size="30"
@@ -105,6 +105,13 @@
 			type="checkbox"
 			label="COM_CONTIGOMAS_FIELD_TERMINOS_LABEL"
 			description="COM_CONTIGOMAS_FIELD_TERMINOS_DESC"
+			size="30"
+			required="true"
+		/>
+		<field name="base"
+			type="checkbox"
+			label="COM_CONTIGOMAS_FIELD_BASE_LABEL"
+			description="COM_CONTIGOMAS_BASE_TERMINOS_DESC"
 			size="30"
 			required="true"
 		/>

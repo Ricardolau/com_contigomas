@@ -12,7 +12,7 @@ class ContigomasModelContigomas extends JModelList
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		// Selecciona algunos campos
-		$query->select('id, codigo,created, nombre, apellidos, dni, telefono, email, calle, numero, piso,codigopostal,municipio,provincia,aceptar');
+		$query->select('id, codigo,created, nombre, apellido1, apellido2, telefono, email, calle, numero, piso,codigopostal,municipio,provincia,aceptar');
 		// de nuestra tabla
 		$query->from('#__contigomas');
 		

@@ -23,13 +23,13 @@ foreach($this->items as $i => $item): ?>
 			<?php echo $item->nombre; ?>
 		</td>
 		<td>
-			<?php echo $item->apellidos; ?>
+			<?php echo $item->apellido1; ?>
+		</td>
+		<td>
+			<?php echo $item->apellido2; ?>
 		</td>
 		<td>
 			<?php echo $item->codigopostal; ?>
-		</td>
-		<td>
-			<?php echo $item->dni; ?>
 		</td>
 		<td>
 			<?php echo $item->telefono; ?>

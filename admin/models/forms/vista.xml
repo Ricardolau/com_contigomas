@@ -31,22 +31,22 @@
 			required="true"
 		 />
 
-		<field name="apellidos"
+		<field name="apellido1"
 			type="text"
-			label="COM_CONTIGOMAS_FIELD_APELLIDOS_LABEL"
-			description="COM_CONTIGOMAS_FIELD_APELLIDOS_DESC"
+			label="COM_CONTIGOMAS_FIELD_APELLIDO1_LABEL"
+			description="COM_CONTIGOMAS_FIELD_APELLIDO1_DESC"
 			class="inputbox"
 			size="30"
 			required="true"
 		/>
 
-		<field name="dni"
+		<field name="apellido2"
 			type="text"
-			label="COM_CONTIGOMAS_FIELD_DNI_LABEL"
-			description="COM_CONTIGOMAS_FIELD_DNI_DESC"
+			label="COM_CONTIGOMAS_FIELD_APELLIDO2_LABEL"
+			description="COM_CONTIGOMAS_FIELD_APELLIDO2_DESC"
 			class="inputbox"
 			size="30"
-			required="true"
+			
 		/>
         <field name="telefono"
 			type="text"
