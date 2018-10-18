@@ -2,7 +2,7 @@
 <!-- Añadimos los campo queremos mostrar en la vista de codigorecibo
 	que la vista entrada de datos -->
 <form>
-	<fieldset name="contigomas" label="COM_CONTIGOMAS_FORM_LABEL">
+	<fieldset name="registro" label="COM_CONTIGOMAS_FORM_LABEL">
 		
 		<field name="nombre"
 			type="text"
@@ -24,14 +24,14 @@
 			label="COM_CONTIGOMAS_FIELD_DNI_LABEL"
 			description="COM_CONTIGOMAS_FIELD_DNI_DESC"
 			size="30"
-			required="true"
 		/>
-       <field name="telefono"
+         <field name="telefono"
 			type="text"
 			label="COM_CONTIGOMAS_FIELD_TELEFONO_LABEL"
 			description="COM_CONTIGOMAS_FIELD_TELEFONO_DESC"
 			size="30"
 			required="true"
+            pattern="[0-9]{9}"
 		/>
         <field name="email"
 			type="text"
@@ -40,6 +40,25 @@
 			size="30"
 			required="true"
 		/>
+    </fieldset>
+  	<fieldset name="direccion" label="COM_CONTIGOMAS_FORM_LABEL">
+        <field name="regalo"
+            type="list"
+			label="COM_CONTIGOMAS_FIELD_REGALO_LABEL"
+			description="COM_CONTIGOMAS_FIELD_REGALO_LABEL"
+			default="0"
+            class="regalo"
+			>
+                <option value="2">COM_CONTIGOMAS_FIELD_REGALO_OPTION2</option>
+                <option value="1">COM_CONTIGOMAS_FIELD_REGALO_OPTION1</option>
+				<option value="0">COM_CONTIGOMAS_FIELD_REGALO_OPTION0</option>
+        </field>
+        <field
+            type="spacer"
+            name="myspacer"
+            class="text"
+            label="COM_CONTIGOMAS_FIELD_SEPARADOR_REGALO_OPTION"
+        />
         <field name="calle"
 			type="text"
 			label="COM_CONTIGOMAS_FIELD_CALLE_LABEL"
