@@ -16,12 +16,13 @@ class ContigomasModelRespuesta extends JModelList
             
             // Ahora creamos codigo.
             $codigo =$this->obtenerCodigo($data['jform']);
-            $arrayCodigo = $this->comprobarCodigo($codigo);
-            if ($arrayCodigo['buscar'] == 0 ){
+            $control = $this->comprobarCodigo($codigo);
+           
+            if ($control == 0 ){
                 // Añdimos el codigo a data, para mandar grabar ya que no existe ese codigo.
                 $codigo = array('codigo' => $codigo);
                 $data['jform']= $data['jform']+$codigo;
-                $insertar = $this->getInsertQuery($data['jform']); 
+                $insertar = $this->getInsertQuery($data['jform']);
             } else {
                 // hubo un error en buscar por lo que añadimos mensaje ...
                 $insertar   = 1;
@@ -30,7 +31,7 @@ class ContigomasModelRespuesta extends JModelList
             
             if ($insertar > 0){
                 // Fue correcto, me envio tb el codigo
-                $this->avisos($arrayCodigo['buscar']);;
+                $this->avisos($control);;
             }
             
 			return $data;
@@ -102,7 +103,6 @@ class ContigomasModelRespuesta extends JModelList
 
 
     public function avisos($respuesta){
-
             if ($respuesta > 0) {
                 // hubo un error, o se envio el formulario dos veces...
                 $texto = 'El registro ya existe o hubo error al insertar, por favor ponte en contacto con el responsable de la web';
