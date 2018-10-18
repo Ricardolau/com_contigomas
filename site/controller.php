@@ -60,35 +60,11 @@ class ContigomasController extends JControllerLegacy
 		$input = JFactory::getApplication()->input;
 
 		//~ // Get the data from POST
-		 $this->resultado = JRequest::getVar('jform', array(), 'get', 'array');
-		
-
-		 
-		 // Ahora comprobamos resultado
-		// $resul = $this->comprobar($codigo,$recibo);
-		//~ echo ' Ver resultado... ';
-		//~ echo '<pre>';
-		//~ print_r($this);
-		//~ echo '</pre>';
-		/* Tengo que volver a meter está variable porque me problemas
-		 * el input->getCmd que no existe objeto */
-		//if  ($input->getCmd('view') == 'codigorecibo')
-		//{
-			//~ echo '<br/> ************************************************************** <br/>';
-			//~ echo '<br/> Controler general -> funcion display-->  En if codigorecibo <br/>';
-			//~ echo '<br/> ************************************************************** <br/>';
-			//~ echo ' Voy a redireccionar ';
-			/* Yo en vez de redirecciona, pienso se podría 
-			 * 1.- Cambiar la vista directamente...
-			 * Y luego creo que los datos ya estarían...*/
-			 
-			//$this->dato = $codigo;
-			$this->set('view', $input->getCmd('view', 'respuesta')); 
-			//~ $this->setRedirect(JRoute::_('index.php?option=com_codigorecibo&view=vista1&id='.$codigo.'&recibo='.$recibo),false);
+        
+        $this->resultado = JRequest::getVar('jform', array(), 'get', 'array');
+		$this->set('view', $input->getCmd('view', 'respuesta')); 
+			
 			return ;
-		//}
-		
-		//~ return $resul;
 	}	
 		
 	

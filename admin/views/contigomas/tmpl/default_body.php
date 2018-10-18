@@ -53,7 +53,7 @@ foreach($this->items as $i => $item): ?>
 			<?php echo $item->provincia; ?>
 		</td>
 		<td>
-			<?php echo $item->aceptar; ?>
+			<?php echo $item->terminos; ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

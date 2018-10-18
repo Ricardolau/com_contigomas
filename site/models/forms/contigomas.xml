@@ -78,7 +78,6 @@
 			label="COM_CONTIGOMAS_FIELD_PISO_LABEL"
 			description="COM_CONTIGOMAS_FIELD_PISO_DESC"
 			size="30"
-			required="true"
 		/>
         <field name="codigoPostal"
 			type="text"
@@ -106,7 +105,7 @@
 			label="COM_CONTIGOMAS_FIELD_TERMINOS_LABEL"
 			description="COM_CONTIGOMAS_FIELD_TERMINOS_DESC"
 			size="30"
-			required="true"
+            default="0"
 		/>
 		<field name="base"
 			type="checkbox"
@@ -114,6 +113,7 @@
 			description="COM_CONTIGOMAS_BASE_TERMINOS_DESC"
 			size="30"
 			required="true"
+            default="0"
 		/>
 
 	</fieldset>
