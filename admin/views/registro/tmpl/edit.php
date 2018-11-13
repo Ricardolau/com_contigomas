@@ -28,7 +28,7 @@ JHtml::_('behavior.tooltip');
                 </div>
         </fieldset>
         <div>
-                <input type="hidden" name="task" value="vista.edit" />
+                <input type="hidden" name="task" value="registro.edit" />
                 <?php echo JHtml::_('form.token'); ?>
         </div>
 </form>

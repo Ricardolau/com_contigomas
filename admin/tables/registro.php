@@ -7,7 +7,7 @@ defined('_JEXEC') or die;
  * @subpackage	com_newsfeeds
  */
  //~ echo '<br/> estoy en TABLES--> vista.php ';
-class ContigomasTableVista extends JTable
+class ContigomasTableRegistro extends JTable
 {
 	/**
 	 * Constructor
@@ -58,7 +58,7 @@ class ContigomasTableVista extends JTable
 		
 		/////////////////////////////////////////////////////////////////////////////
 		/*		COMPROBAR QUE EL CODIGO al editar NO SE REPITA EN LA BBDD	*/
-		$table = JTable::getInstance('Vista', 'ContigomasTable');
+		$table = JTable::getInstance('Registro', 'ContigomasTable');
         
 		//~ if  ($table->load(array('codigo'=>$this->codigo)) && ($table->codigo != $this->codigo || $this->codigo==0)) {
 			//~ $this->setError('El codigo no se puede repetir');//JText::_('COM_WEBLINKS_ERROR_UNIQUE_ALIAS'));

@@ -19,7 +19,7 @@ class ContigomasController extends JControllerLegacy
 		
 		//ESTO NO ME HACE NADA
 			// Compruebe formulario de edición .
-		if ($view == 'vista' && $layout == 'edit' && !$this->checkEditId('com_contigomas.edit.vista', $id)) 
+		if ($view == 'registro' && $layout == 'edit' && !$this->checkEditId('com_contigomas.edit.registro', $id)) 
 		{
 			
 			$this->setRedirect(JRoute::_('index.php?option=com_contigomas&view=contigomas', false));

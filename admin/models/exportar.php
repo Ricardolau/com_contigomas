@@ -19,9 +19,7 @@ class ContigomasModelExportar extends JModelList
 		//columnas que se muestran, id  , ordenado asc...
 		$orderCol	= $this->state->get('list.ordering', 'id');
 		$orderDirn	= $this->state->get('list.direction', 'asc');
-		//~ if ($orderCol == 'a.ordering' || $orderCol == 'category_title') {
-			//~ $orderCol = 'c.title '.$orderDirn.', a.ordering';
-		//~ }
+		
 		$query->order($db->escape($orderCol.' '.$orderDirn));
 		$db->setQuery($query);
 		$respuesta = $db->execute();
@@ -29,34 +27,54 @@ class ContigomasModelExportar extends JModelList
 		return $respuesta;
 	}
     public function getExportar(){
-        $query = $this->getListQuery();
-        if($query->num_rows > 0){
-            $delimiter = ",";
-            $filename = "members_" . date('Y-m-d') . ".csv";
-            
-            //create a file pointer
-            $f = fopen('php://memory', 'w');
-            
-            //set column headers
-            $fields = array('id', 'nombre', 'aoellidos', 'dni', 'telefono', 'email');
-            fputcsv($f, $fields, $delimiter);
-            
-            //output each row of the data, format line as csv and write to file pointer
-            while($row = $query->fetch_assoc()){
-                $lineData = array($row['id'], $row['nombre'], $row['email'], $row['telefono'], $row['dni']);
-                fputcsv($f, $lineData, $delimiter);
+        // Objetivo:
+        // Crear un csv y guardarlo en una ruta segura.
+        $respuesta = array();
+        // Antes de hacer nada comprobamos que exista la ruta segura.
+        $ruta_segura = '/home/solucion40/w3ww';
+        $filename = "reports_" . date('Y-m-d') . ".csv";
+
+        if (is_dir($ruta_segura)){
+            $query = $this->getListQuery();
+            if($query->num_rows > 0){
+                $delimiter = ",";
+                
+                //create a file pointer
+                //~ $f = fopen('php://memory', 'w');
+                $f =  fopen($ruta_segura.'/'.$filename, 'w');
+                //set column headers
+                $fields = array('id','codigo','created', 'nombre', 'apellido1', 'apellido2', 'telefono', 'email', 'calle', 'numero', 'piso','codigopostal','municipio','provincia','terminos','regalo','base');
+                fputcsv($f, $fields, $delimiter);
+                
+                //output each row of the data, format line as csv and write to file pointer
+                while($row = $query->fetch_assoc()){
+                    $lineData = array($row['id'], $row['nombre'], $row['email'], $row['telefono']);
+                    fputcsv($f, $lineData, $delimiter);
+                }
+                
+                //move back to beginning of file
+                fseek($f, 0);
+                
+                //set headers to download file rather than displayed
+                
+                if (fpassthru($f) === FALSE){
+                    // Error al crear fichero
+                    $respuesta['creado'] = 'KO';
+                    $respuesta['error'] = 'Error a la hora de escritura del fichero';
+
+                } else {
+                    $respuesta['creado'] = 'OK';
+
+                };
+                
             }
-            
-            //move back to beginning of file
-            fseek($f, 0);
-            
-            //set headers to download file rather than displayed
-            header('Content-Type: text/csv');
-            header('Content-Disposition: attachment; filename="' . $filename . '";');
-            
-            //output all remaining data on a file pointer
-            fpassthru($f);
+        } else {
+            $respuesta['creado'] = 'KO';
+            $respuesta['error'] = 'No es correcta la ruta segura';
         }
+        $respuesta['filename'] = $filename;
+
+        return $respuesta;
     }
 
     

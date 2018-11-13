@@ -6,7 +6,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.modeladmin');
  
 /** Vista Model */
-class ContigomasModelVista extends JModelAdmin
+class ContigomasModelRegistro extends JModelAdmin
 {
         /**
          * Returns a reference to the a Table object, always creating it.
@@ -17,7 +17,7 @@ class ContigomasModelVista extends JModelAdmin
          * @return      JTable  A database object
          * @since       2.5
          */
-        public function getTable($type = 'Vista', $prefix = 'ContigomasTable', $config = array()) 
+        public function getTable($type = 'Registro', $prefix = 'ContigomasTable', $config = array()) 
         {
                 return JTable::getInstance($type, $prefix, $config);
         }
@@ -33,7 +33,7 @@ class ContigomasModelVista extends JModelAdmin
         public function getForm($data = array(), $loadData = true) 
         {
                 // Get the form.
-                $form = $this->loadForm('com_contigomas.vista', 'vista',array('control' => 'jform', 'load_data' => $loadData));
+                $form = $this->loadForm('com_contigomas.registro', 'registro',array('control' => 'jform', 'load_data' => $loadData));
                 if (empty($form)) 
                 {
                         return false;
@@ -52,7 +52,7 @@ class ContigomasModelVista extends JModelAdmin
         protected function loadFormData() 
         {
                 //Compruebe la sesión de datos de formularios previamente introducidos.
-                $data = JFactory::getApplication()->getUserState('com_contigomas.edit.vista.data', array());
+                $data = JFactory::getApplication()->getUserState('com_contigomas.edit.registro.data', array());
                 if (empty($data)) 
                 {
                         $data = $this->getItem();
