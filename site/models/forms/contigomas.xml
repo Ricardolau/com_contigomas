@@ -100,10 +100,14 @@
 			size="30"
 			required="true"
 		/>
-		<field name="terminos"
+    </fieldset>
+    <fieldset name="checkboxfield" label="COM_CONTIGOMAS_FORM_LABEL">
+            <field name="terminos"
 			type="checkbox"
 			label="COM_CONTIGOMAS_FIELD_TERMINOS_LABEL"
 			description="COM_CONTIGOMAS_FIELD_TERMINOS_DESC"
+            link="COM_CONTIGOMAS_LINK_TERMINOS"
+            link_texto = "COM_CONTIGOMAS_TEXTO_LINK_TERMINOS"
 			size="30"
             default="0"
 		/>
@@ -111,6 +115,8 @@
 			type="checkbox"
 			label="COM_CONTIGOMAS_FIELD_BASE_LABEL"
 			description="COM_CONTIGOMAS_BASE_TERMINOS_DESC"
+            link="COM_CONTIGOMAS_LINK_BASES"
+            link_texto = "COM_CONTIGOMAS_TEXTO_LINK_BASES"
 			size="30"
 			required="true"
             default="0"
