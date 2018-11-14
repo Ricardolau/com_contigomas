@@ -5,21 +5,14 @@
 		label="COM_CONTIGOMAS_FIELD_CONFIG_CONTIGOMAS_FORM"
 		description="COM_CONTIGOMAS_FIELD_CONFIG_INDIVIDUAL_CONTIGOMAS_DESC"
 	>
-	<field name="texto_principal"
-			type="textarea"
-			label="COM_CONTIGOMAS_FIELD_CONFIG_TEXTO_PRINCIPAL_LABEL"
+        <field name="ruta_segura"
+			type="text"
+			label="COM_CONTIGOMAS_FIELD_CONFIG_RUTA_SEGURA_LABEL"
 			rows="3"
-			cols="30"
-			description="COM_CONTIGOMAS_FIELD_CONFIG_TEXTO_PRINCIPAL_DESC"
+			cols="60"
+			description="COM_CONTIGOMAS_FIELD_CONFIG_RUTA_SEGURA_DESC"
 		/>
 
-		<field name="texto_secundario"
-			type="textarea"
-			label="COM_CONTIGOMAS_FIELD_CONFIG_TEXTO_SECUNDARIO_LABEL"
-			rows="3"
-			cols="30"
-			description="COM_CONTIGOMAS_FIELD_CONFIG_TEXTO_SECUNDARIO_DESC"
-		/>
 	</fieldset>
 	
 

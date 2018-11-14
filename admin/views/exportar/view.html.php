@@ -16,12 +16,10 @@ class ContigomasViewExportar extends JViewLegacy
         public function display($tpl = null) 
         {
 				ContigomasHelper::addSubmenu('exportar');
-	
-                $S = $this->get('exportar');
+                // Obtenemos parametros
                 
-                echo '<pre>';
-                print_r($S);
-                echo '</pre>';
+                $this->respuesta = $this->get('exportar');
+                
                 // Check for errors.
                 if (count($errors = $this->get('Errors'))) 
                 {
@@ -29,12 +27,20 @@ class ContigomasViewExportar extends JViewLegacy
                         return false;
                 }
                 
-               
+                 // Set the toolbar
+                $this->addToolBar();
  
                 // Display the template
                 parent::display($tpl);
         }
  
-       
+       protected function addToolBar() 
+        {
+                
+                //si el articulo a editar es nuevo pone un titulo
+                // y si es para editar pone el titulo de editar
+                JToolBarHelper::title(JText::_('COM_CODIGOMAS_MANAGER_EXPORTAR'));
+                
+        }
        
 }

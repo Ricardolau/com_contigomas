@@ -30,11 +30,12 @@ class ContigomasModelExportar extends JModelList
         // Objetivo:
         // Crear un csv y guardarlo en una ruta segura.
         $respuesta = array();
-        // Antes de hacer nada comprobamos que exista la ruta segura.
-        $ruta_segura = '/home/solucion40/w3ww';
+        // Antes de hacer nada comprobamos que obtenemos la ruta segura y vemos si existe.
+        $params = JComponentHelper::getParams('com_contigomas');
+        $ruta_segura = $params->get('ruta_segura');
         $filename = "reports_" . date('Y-m-d') . ".csv";
-
-        if (is_dir($ruta_segura)){
+        $respuesta['link']= $ruta_segura.'/'.$filename;
+        if (is_dir($ruta_segura) || strlen(trim($ruta_segura)) == 0){
             $query = $this->getListQuery();
             if($query->num_rows > 0){
                 $delimiter = ",";
@@ -56,8 +57,8 @@ class ContigomasModelExportar extends JModelList
                 fseek($f, 0);
                 
                 //set headers to download file rather than displayed
-                
-                if (fpassthru($f) === FALSE){
+                $r = fpassthru($f);
+                if ( $r=== FALSE){
                     // Error al crear fichero
                     $respuesta['creado'] = 'KO';
                     $respuesta['error'] = 'Error a la hora de escritura del fichero';
@@ -70,11 +71,22 @@ class ContigomasModelExportar extends JModelList
             }
         } else {
             $respuesta['creado'] = 'KO';
-            $respuesta['error'] = 'No es correcta la ruta segura';
+            $respuesta['error'] = 'No es correcta la ruta segura:'.$ruta_segura;
+            
+            if (strlen(trim($ruta_segura)) == 0){
+                $respuesta['error'] = 'No esta definida la ruta, vete opciones del componente';
+            }
         }
         $respuesta['filename'] = $filename;
-
+        //~ $respuesta['parametros'] = $params;
         return $respuesta;
+    }
+
+    public function getDescargar(){
+        $respuesta = array();
+        $respuesta['entro'] = 'Entro';
+        return $respuesta;
+
     }
 
     
