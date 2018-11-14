@@ -44,12 +44,42 @@ class ContigomasModelExportar extends JModelList
                 //~ $f = fopen('php://memory', 'w');
                 $f =  fopen($ruta_segura.'/'.$filename, 'w');
                 //set column headers
-                $fields = array('id','codigo','created', 'nombre', 'apellido1', 'apellido2', 'telefono', 'email', 'calle', 'numero', 'piso','codigopostal','municipio','provincia','terminos','regalo','base');
+                $fields = array('id','codigo','created', 'Nombre y Apellidos', 'telefono', 'email', 'calle', 'numero', 'piso','codigopostal','municipio','provincia','terminos','base','regalo');
                 fputcsv($f, $fields, $delimiter);
                 
                 //output each row of the data, format line as csv and write to file pointer
                 while($row = $query->fetch_assoc()){
-                    $lineData = array($row['id'], $row['nombre'], $row['email'], $row['telefono']);
+                    $terminos = ($row['terminos'] == 1 ? 'OK' : 'KO');
+                    $base = ($row['base'] == 1 ? 'OK' : 'KO'); 
+                    switch ($row['regalo']) {
+                        case '0':
+                            $regalo = 'Vale Vivero';
+                            break;
+                        case '1':
+                            $regalo = 'Vale Supermercado Gadis';
+                            break;
+                        case '2':
+                            $regalo = 'Vale Repsol';
+                            break;
+
+                    }
+                    $lineData = array(  $row['id'],
+                                        $row['codigo'],
+                                        $row['created'],
+                                        $row['nombre'].' '.$row['apellido1'].' '.$row['apellido2'],
+                                        $row['telefono'],
+                                        $row['email'],
+                                        $row['calle'],
+                                        $row['numero'],
+                                        $row['piso'],
+                                        $row['codigopostal'],
+                                        $row['municipio'],
+                                        $row['provincia'],
+                                        $terminos,
+                                        $base,
+                                        $regalo
+
+                                    );
                     fputcsv($f, $lineData, $delimiter);
                 }
                 
