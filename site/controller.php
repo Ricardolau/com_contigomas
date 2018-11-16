@@ -1,7 +1,6 @@
 <?php
 defined( '_JEXEC' ) or die( 'Restricted access' );
 //~ jimport('joomla.application.component.controller');
-//echo ' 30 Entre en controlador general';
 
 class ContigomasController extends JControllerLegacy
 {	
@@ -24,30 +23,21 @@ class ContigomasController extends JControllerLegacy
 		 * al venir la primera vez ya viene con contigomas 
 		 * y al volver trae la vista por defecto.
 		 * */
-		 
+       
 		if  ($input->getCmd('view') == 'contigomas')
 		{
-			//~ echo '<br/> Controler general -> funcion display-->  En if contigomas <br/>';
+            // La vista contigomas podemos llegar de varias forma.
+            // Incluso podemos llegar una vez cubierto el formulario , es decir
+            // ya tenemos un registro realizado por lo que debemos controlarlo.
+            $ControlSession     = JFactory::getSession();
+            if ($ControlSession->get('id_contigomas')){
+                // Quiere decir que ya hizo un registro
+                // por lo que cambiamos la vista.
+                JRequest::setVar('view', 'respuesta');
+            }
+           
 		}
-		if  ($input->getCmd('view') == 'vista1')
-		{
-			//~ $this->prueba = "Entro";
-			
-			
-			//~ echo '<br/> ************************************************************** <br/>';
-			//~ echo '<br/> Controler general -> funcion display-->  En if  vista1 <br/>';
-			//~ echo '<br/> ************************************************************** <br/>';
-			//~ $id = $_GET['id'];
-			//~ echo ' Imprimo ID:'.$id;
-			//~ $this->comprobar($id);
-			
-			/* La cuestión es que  si va comprobar y toma datos, pero no sabemos 
-			 * como enviarlo al objeto creado por la view.vista1
-			 * Si embargo en el fichero codigorecibo.php de raiz si muestra el objeto.
-			 * por lo que entiendo que si lo supieramos instancias entonces si podríamos 
-			 * recuperarlo.
-			 * */
-		}
+		
 					
 		 
 		return parent::display($this);
@@ -58,16 +48,28 @@ class ContigomasController extends JControllerLegacy
 
 		// Initialise variables.
 		$input = JFactory::getApplication()->input;
+        $data = $input->getArray($_POST);
 
 		//~ // Get the data from POST
-        
         $this->resultado = JRequest::getVar('jform', array(), 'get', 'array');
 		$this->set('view', $input->getCmd('view', 'respuesta')); 
 			
-			return ;
+		return ;
 	}	
 		
-	
+	public function enviar_email()
+	{
+		// Initialise variables.
+		$input = JFactory::getApplication()->input;
+        $data = $input->getArray($_POST);
+        
+		//~ // Get the data from POST
+        //~ $this->resultado = JRequest::getVar('jform', array(), 'get', 'array');
+		$this->set('view', $input->getCmd('view', 'respuesta')); 
+        $this->display();
+		return ;
+	}	
+		
 
 
 }

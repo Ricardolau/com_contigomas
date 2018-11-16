@@ -6,35 +6,70 @@ defined('_JEXEC') or die;
 			
 class ContigomasModelRespuesta extends JModelList
 {
-	
 	public function getComprobar()
 	{
-			
-			$jinput = JFactory::getApplication()->input; 
-            
+			$resultado = array();
+            $insert = 0;
+            $codigo = '';
+            $jinput = JFactory::getApplication()->input;   
             $data = $jinput->getArray($_POST);
+            $ControlSession     = JFactory::getSession();
+            // Comprobamos realmente si llegamos del jform
+            if ( isset($data['jform'])){
+                // Ahora creamos codigo.
+                $codigo =$this->obtenerCodigo($data['jform']);
+                // Comprobamos si esta repetido el codigo
+                $control = $this->comprobarCodigo($codigo);
+                
+                    // Se acaba de enviar el formulario y el codigo es generado es correcto
+                    if ($control == 0 ){
+                        // Añadimos el codigo a data, para mandar grabar ya que no existe ese codigo.
+                        $data['jform']['codigo'] = $codigo;
+                        $insert = $this->getInsertQuery($data['jform']);
+                        // Si la respuesta 0 quiere decir que no inserto.
+                        if ($insert === 0){
+                            // Hubo un error al insertar
+                            $error = array( 'type' => 'danner',
+                                    'texto'  => 'Hubo un error al insertar el registro:'.json_encode($data['jform'])
+                                    );
+                        } else {
+                            // Fue correcta insertar por lo que guardamos en sesion el id_contigomas
+                            // Asi evitamos que con la mis session pueda duplicarse.
+                            $ControlSession->set('id_contigomas',$insert);
+
+                        }
+                    } else {
+                        // Quiere decir que el código ya existe por lo que no creamos
+                        $error = array( 'type' => 'warning',
+                                        'texto'  => 'Duplicado de codigo:'.$codigo
+                                );
+                    }
+            }
             
-            // Ahora creamos codigo.
-            $codigo =$this->obtenerCodigo($data['jform']);
-            $control = $this->comprobarCodigo($codigo);
-           
-            if ($control == 0 ){
-                // Añdimos el codigo a data, para mandar grabar ya que no existe ese codigo.
-                $codigo = array('codigo' => $codigo);
-                $data['jform']= $data['jform']+$codigo;
-                $insertar = $this->getInsertQuery($data['jform']);
+            
+            if ($insert >0 ) {
+                $r = $this->getObtenerId($insert);
+                if (isset ($r['error'])){
+                    // hubo un error en la consulta.
+                    $resultado['id'] = $insert;
+                    $resultado['codigo'] = $codigo;
+                    $error = array('type'=>'dannder','texto' => $r['error']);
+                    $resultado['error'][] =$error;
+                } else {
+                    $resultado = $r['item'];
+                }
             } else {
-                // hubo un error en buscar por lo que añadimos mensaje ...
-                $insertar   = 1;
-            
+                $resultado = $data['jform'];
+                $resultado['id'] = $insert;
+                $resultado['codigo'] = $codigo;
             }
-            
-            if ($insertar > 0){
-                // Fue correcto, me envio tb el codigo
-                $this->avisos($control);;
+            if (isset($error)){
+                // Hubo errores, añado los avisos
+                $this->avisos($error);
+                $resultado['error'][] =$error;
             }
-            
-			return $data;
+                        
+			return $resultado;
 			
 	}
 
@@ -78,7 +113,7 @@ class ContigomasModelRespuesta extends JModelList
     public function getInsertQuery($datos){
 
         $fecha=date("Y-m-d H:i:s");
-
+        $id = 0;
         $db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		// Como el check termino no es obligatorio, entonces voy a comprobar que existe, para evirta nocite.
@@ -93,29 +128,133 @@ class ContigomasModelRespuesta extends JModelList
 		"'.$datos['provincia'].'", "'.$datos['terminos'].'", '.'"'.$datos['base'].'", '.'"'.$datos['regalo'].'","'.$fecha.'", "'.$fecha.'")';
 		$db->setQuery($query);
 		$db->execute();
-		if ($db->getErrorNum()){
-			$respuesta = 1;
-		}else{
-			$respuesta = 0;
+        $id= $db->insertid();
+        if ($db->getErrorNum()){
+			$id = 0;
 		}
-      return $respuesta; 
+      return $id; 
 	}
 
 
-    public function avisos($respuesta){
-            if ($respuesta > 0) {
+    public function avisos($error){
+            if (gettype($error) == 'array') {
                 // hubo un error, o se envio el formulario dos veces...
-                $texto = 'El registro ya existe o hubo error al insertar, por favor ponte en contacto con el responsable de la web';
-                $typeAlerta = 'warning';
+                $texto = $error['texto'];
+                $typeAlerta = $error['type'];
                 
             } 
             // enviamos el mensaje.
             JFactory::getApplication()->enqueueMessage($texto, $typeAlerta);
 
+    }
 
 
+    public function getObtenerId($id=null){
+        // Obtener registro.    
+        if ($id === null){
+            $id = 0;
+        }
+        // Consultamos que no exista.
+        $resultado = array();
+        $db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+        try{
+            $query->select('id, codigo,created, nombre, apellido1, apellido2, telefono, email, calle, numero, piso,codigopostal,municipio,provincia,terminos,base,regalo')
+            ->from('#__contigomas')
+            ->where( $db->quoteName('id').' = "'.$id.'"');
+
+            $db->setQuery($query);
+            $db->execute();
+            
+            $resultado['item']=$db->loadAssoc();
+        }catch (Exception $e) {
+                $resultado['error']=$e->getMessage();
+        }
+        
+        return $resultado;
+    }
+
+
+    public function getEnviarEmail($id){
+        // Objetivo:
+        // Enviar email con el codigo al que lo registro.
+        $respuesta =  array( 'estado' =>'KO');
+        $r= $this->getObtenerId($id);
+        // Comprobamos si datos son correctos
+        if (isset($r['item'])){
+            if (trim ($r['item']['email']) ==''){
+                // Error , esta vacio el email.
+                $error = array( 'type' => 'warning',
+                                'texto'  => 'Hubo un error al comprobar los datos del registro:'.$id.' ponte en contacto con nosotros y comentanosl'
+                            );
+                $this->avisos($error);
+                $respuesta['error'] = $error;
+
+            }
+        }
+        $r = $this->enviarEmail($r['item']);
+        $respuesta['estado'] = $r;
+        
+        
+        return $respuesta;
 
     }
 
+
+    static function enviarEmail($datos)
+	{
+
+        	// Creamos distanatarios que puede ser un array
+			$destinatario = $datos['email'];
+			/* http://docs.joomla.org/Sending_email_from_extensions  */
+        	// Antes de enviar tenemos que saber que hay email...
+        	$mail = JFactory::getMailer();
+			// Creamos el body del mensaje bien ...
+                $body = '<h3>'.JText::_('COM_CODIGOMAS_RESPUESTA_TITULO_OK').'</h3>';
+                $body .='<p>'.JText::_('COM_COTIGOMAS_TEXTO_CODIGOPROMOCIONAL').'</p>';
+                 $body .= '<div class="columna-verde" style="margin:10px;">
+                <h5 style="margin-top:5px;font-size:3em">'.$datos['codigo'].'</h5></div>';
+            
+				$body .= '<b>'. 'Hola '.'</b>:'.$datos['nombre'].' '.$datos['apellido1'].' '.$datos['apellido2'].'<br/>';
+				$body .= '<p>'.'Gracias por participar, si tienes cualquier duda ponte en contacto con nosotros.<br/>';
+                $body .= '<b>'.' Ref:'.'</b>:'.$datos['id'].'<br/>';
+               
+				// Creo que para mandar por SMTP tengo añadir usuario y contraseña
+				// Que la obtendo con ...
+				$app = JFactory::getApplication();
+				$mailfrom = $app->get('mailfrom');
+				$fromname = $app->get('fromname');
+				$sitename = $app->get('sitename');
+				// Montamos subjecto con nombre formulario y asunto puesto.
+				$subject = 'Web:'.$sitename .' - Envio Codigo ';
+
+				// Ahora montamos el correo para enviarlos.
+				$mail->isHTML(true); // Indicamos que el body puede tener html
+				$mail->addRecipient($destinatario);
+				//$mail->addReplyTo(array($email, $name));
+				$mail->setSender(array($mailfrom, $fromname));
+				$mail->setSubject($subject);
+				$mail->setBody($body);
+
+
+				// Envio de email
+				$sent = $mail->Send();
+				// Contestación de envio.
+				if ( $sent !== true ) {
+					/*echo '<pre>';
+					print_r ($destinatario);
+					echo '</pre>';*/
+					$resultado = 'KO';
+
+				} else {
+					// Para añadir al array el resultado correcto.
+					$resultado= 'OK';
+				}
+
+
+		return $resultado;
+	}
+
+    
     
 }
