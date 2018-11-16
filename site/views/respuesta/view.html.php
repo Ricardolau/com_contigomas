@@ -32,7 +32,7 @@ class ContigomasViewRespuesta extends JViewLegacy
             if ( JRequest::getVar('task')!== 'enviar_email'){
                 // Mostrramos advertencia que ya tenemos registro.
                 $error = array( 'type' => 'warning',
-                                    'texto'  => 'Tu registro ya fue grabado una vez, si quier enviar otro , cierra el navegador y vuelve intentarlo'
+                                    'texto'  =>JText::_('COM_CONTIGOMAS_AVISO_YA_REGISTRADO')
                             );
                 JFactory::getApplication()->enqueueMessage($error['texto'], $error['type']);
             } else {

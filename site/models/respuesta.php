@@ -216,7 +216,7 @@ class ContigomasModelRespuesta extends JModelList
                 <h5 style="margin-top:5px;font-size:3em">'.$datos['codigo'].'</h5></div>';
             
 				$body .= '<b>'. 'Hola '.'</b>:'.$datos['nombre'].' '.$datos['apellido1'].' '.$datos['apellido2'].'<br/>';
-				$body .= '<p>'.'Gracias por participar, si tienes cualquier duda ponte en contacto con nosotros.<br/>';
+				$body .= '<p>'.JTEXT::_('COM_CONTIGOMAS_ENVIO_EMAIL_GRACIAS').'<br/>';
                 $body .= '<b>'.' Ref:'.'</b>:'.$datos['id'].'<br/>';
                
 				// Creo que para mandar por SMTP tengo añadir usuario y contraseña
